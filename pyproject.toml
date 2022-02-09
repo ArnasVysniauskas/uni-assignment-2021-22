@@ -7,8 +7,32 @@ authors = ["ArnasVysniauskas <81956480+ArnasVysniauskas@users.noreply.github.com
 [tool.poetry.dependencies]
 python = "^3.10"
 click = "^8.0.3"
+flake8 = "^4.0.1"
+isort = "^5.10.1"
+black = "^22.1.0"
+mypy = "^0.931"
+taskipy = "^1.9.0"
 
 [tool.poetry.dev-dependencies]
+
+[tool.taskipy.tasks]
+check_types = "mypy ."
+lint = "flake8 ."
+fmt = "isort . && black ."
+check_all = "task fmt && task lint && task check_types"
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+include_trailing_comma = true
+use_parentheses = true
+
+[tool.mypy]
+ignore_missing_imports = true
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
